@@ -11,9 +11,9 @@ class WebsiteFetcher():
 
     def fetch(self):
         url = input("Website die gecrawled werden soll: ")
-        self.website_list[url] = CrawledWebsite(url)
         depth = 0
-        while url != "" and depth < 10:
+        self.website_list[url] = CrawledWebsite(url, depth)
+        while url != "" and depth < 3:
 
             print("checking: " + url)
             time.sleep(1)
@@ -35,7 +35,7 @@ class WebsiteFetcher():
                         continue
                     link_list.append(link)
                     if link not in self.website_list:
-                        self.website_list[link] = CrawledWebsite(link)
+                        self.website_list[link] = CrawledWebsite(link, depth + 1)
             self.website_list[url].set_link_list(link_list)
             yield link_list
 
@@ -44,5 +44,5 @@ class WebsiteFetcher():
                     url = ""
                 else:
                     url = website
-                    depth = depth + 1
+                    depth = self.website_list[website].depth
                     break
