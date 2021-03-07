@@ -1,0 +1,6 @@
+python-igraph
+cairocffi
+numpy
+pandas
+beautifulsoup4
+urllib
