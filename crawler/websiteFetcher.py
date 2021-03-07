@@ -34,9 +34,11 @@ class WebsiteFetcher():
                     elif link.startswith("mailto:"):
                         continue
                     link_list.append(link)
-                    if link not in self.website_list:
+                    if link not in self.website_list and link.startswith(url):
                         self.website_list[link] = CrawledWebsite(link, depth + 1)
             self.website_list[url].set_link_list(link_list)
+            self.website_list[url].set_external_link_list(link_list)
+            self.website_list[url].finish_crawling()
             yield link_list
 
             for website in self.website_list.keys():

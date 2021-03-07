@@ -3,4 +3,4 @@ cairocffi
 numpy
 pandas
 beautifulsoup4
-urllib
+requests
