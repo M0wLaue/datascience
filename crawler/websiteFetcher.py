@@ -11,9 +11,10 @@ class WebsiteFetcher():
 
     def fetch(self):
         url = input("Website die gecrawled werden soll: ")
+        max_depth = int(input("Wie tief soll gecrawled werden? (Anzahl Ebnen): "))
         depth = 0
         self.website_list[url] = CrawledWebsite(url, depth)
-        while url != "" and depth < 3:
+        while url != "" and depth < max_depth:
 
             print("checking: " + url)
             time.sleep(1)
