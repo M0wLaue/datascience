@@ -9,14 +9,25 @@ class WebsiteFetcher():
     def __init__(self):
         self.website_list = {}
 
-    def fetch(self):
-        url = input("Website die gecrawled werden soll: ")
-        max_depth = int(input("Wie tief soll gecrawled werden? (Anzahl Ebnen): "))
+    def add_website(self, url):
+        self.website_list[url] = CrawledWebsite(url, 0)
+
+    def get_next_website(self):
+        for website in self.website_list.keys():
+            if self.website_list[website].iscrawled():
+                url = ""
+            else:
+                url = website
+                break
+        return url
+
+    def fetch(self, crawl_depth):
+        url = self.get_next_website()
         depth = 0
-        self.website_list[url] = CrawledWebsite(url, depth)
-        while url != "" and depth < max_depth:
+        while url != "" and depth < crawl_depth:
 
             print("checking: " + url)
+            depth = self.website_list[url].depth
             time.sleep(1)
             r = requests.get(url)
             doc = BeautifulSoup(r.text, "html.parser")
@@ -42,10 +53,5 @@ class WebsiteFetcher():
             self.website_list[url].finish_crawling()
             yield link_list
 
-            for website in self.website_list.keys():
-                if self.website_list[website].iscrawled():
-                    url = ""
-                else:
-                    url = website
-                    depth = self.website_list[website].depth
-                    break
+            url = self.get_next_website()
+
