@@ -9,8 +9,8 @@ class WebsiteFetcher():
     def __init__(self):
         self.website_list = {}
 
-    def add_website(self, url):
-        self.website_list[url] = CrawledWebsite(url, 0)
+    def add_website(self, url, depth=0):
+        self.website_list[url] = CrawledWebsite(url, depth)
 
     def get_next_website(self):
         for website in self.website_list.keys():
@@ -47,7 +47,7 @@ class WebsiteFetcher():
                         continue
                     link_list.append(link)
                     if link not in self.website_list and link.startswith(url):
-                        self.website_list[link] = CrawledWebsite(link, depth + 1)
+                        self.add_website(link, depth + 1)
             self.website_list[url].set_link_list(link_list)
             self.website_list[url].set_external_link_list(link_list)
             self.website_list[url].finish_crawling()
