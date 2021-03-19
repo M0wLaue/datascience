@@ -16,7 +16,7 @@ class CrawledWebsite():
         self.external_linklist = filteredd_linklist
 
     def add_mail(self, mail):
-        maillist.add(mail)
+        self.maillist.add(mail)
 
     def finish_crawling(self):
         self.crawled = True
