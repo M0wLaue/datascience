@@ -35,7 +35,9 @@ class WebsiteFetcher():
             for a in doc.find_all("a"):
                 if "href" in a.attrs:
                     link = a.get('href')
-                    if link[0] == "/":
+                    if link == "":
+                        continue
+                    elif link[0] == "/":
                         link = urljoin(url, link)
                     elif link[0] == "#":
                         continue
