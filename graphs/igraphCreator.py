@@ -1,5 +1,6 @@
 import igraph
-# import crawler.websiteFetcher
+import graphs.plotlyCreator  # pylint: disable=import-error
+
 
 class NetworkGraph():
     def __init__(self, fetcher):
@@ -32,5 +33,12 @@ class NetworkGraph():
 
         self.graph.vs['urls'] = self.urls
         self.graph.vs['types'] = self.types
+
+        # self.graph.vs["label"] = self.graph.vs["urls"]
+        color_dict = {"internal": "blue", "external": "red"}
+        self.graph.vs["color"] = [color_dict[_type] for _type in self.graph.vs["types"]]
+
         layout = self.graph.layout("kk")
         igraph.plot(self.graph, layout=layout)
+
+        graphs.plotlyCreator.create_plotly_plot(layout, len(self.urls), [e.tuple for e in self.graph.es], self.urls)

@@ -4,5 +4,5 @@ numpy
 pandas
 beautifulsoup4
 requests
-igraph
 pycairo
+chart-studio
