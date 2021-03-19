@@ -46,6 +46,7 @@ class WebsiteFetcher():
                     elif link.startswith("tel:"):
                         continue
                     elif link.startswith("mailto:"):
+                        self.website_list[url].
                         continue
                     link_list.append(link)
                     if link not in self.website_list and link.startswith(url):
