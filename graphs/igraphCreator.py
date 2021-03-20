@@ -41,4 +41,4 @@ class NetworkGraph():
         layout = self.graph.layout("kk")
         igraph.plot(self.graph, layout=layout)
 
-        graphs.plotlyCreator.create_plotly_plot(layout, len(self.urls), [e.tuple for e in self.graph.es], self.urls)
+        graphs.plotlyCreator.create_plotly_plot(layout, len(self.urls), [e.tuple for e in self.graph.es], self.urls, [color_dict[_type] for _type in self.graph.vs["types"]])

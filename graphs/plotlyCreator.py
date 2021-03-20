@@ -3,7 +3,7 @@ from plotly.graph_objs import *  # pylint: disable=unused-wildcard-import
 import igraph as ig
 
 
-def create_plotly_plot(layt, N, E, labels):
+def create_plotly_plot(layt, N, E, labels, colors):
     Xn=[layt[k][0] for k in range(N)]
     Yn=[layt[k][1] for k in range(N)]
     Xe=[]
@@ -23,8 +23,8 @@ def create_plotly_plot(layt, N, E, labels):
                 mode='markers',
                 name='ntw',
                 marker=dict(symbol='circle-dot',
-                                            size=5,
-                                            color='#6959CD',
+                                            color=colors,
+                                            size=6,
                                             line=dict(color='rgb(50,50,50)', width=0.5)
                                             ),
                 text=labels,
