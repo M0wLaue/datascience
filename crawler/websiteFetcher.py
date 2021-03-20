@@ -34,7 +34,7 @@ class WebsiteFetcher():
             link_list = []
             for a in doc.find_all("a"):
                 if "href" in a.attrs:
-                    link = a.get('href')
+                    link = a.get('href').rstrip("/")
                     if link == "":
                         continue
                     elif link[0] == "/":
@@ -48,6 +48,11 @@ class WebsiteFetcher():
                     elif link.startswith("mailto:"):
                         self.website_list[url].add_mail(link)
                         continue
+                    elif link.startswith("javascript:"):
+                        continue
+                    elif link.startswith("{"):
+                        continue
+
                     link_list.append(link)
                     if link not in self.website_list and link.startswith(url):
                         self.add_website(link, depth + 1)

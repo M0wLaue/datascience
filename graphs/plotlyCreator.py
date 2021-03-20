@@ -38,8 +38,8 @@ def create_plotly_plot(layt, N, E, labels, colors):
             title=''
             )
 
-    width=800
-    height=800
+    width=1600
+    height=900
     _layout=Layout(title= f"layout of {labels[0]}",
         font= dict(size=12),
         showlegend=False,
@@ -54,22 +54,22 @@ def create_plotly_plot(layt, N, E, labels, colors):
             b=85,
             t=100,
         ),
-        hovermode='closest',
-        annotations=[
-            dict(
-            showarrow=False,
-                text='This igraph.Graph has the Kamada-Kawai layout',
-                xref='paper',
-                yref='paper',
-                x=0,
-                y=-0.1,
-                xanchor='left',
-                yanchor='bottom',
-                font=dict(
-                size=14
-                )
-                )
-            ]
+        hovermode='closest'#,
+        # annotations=[
+        #     dict(
+        #     showarrow=False,
+        #         text='This igraph.Graph has the Kamada-Kawai layout',
+        #         xref='paper',
+        #         yref='paper',
+        #         x=0,
+        #         y=-0.1,
+        #         xanchor='left',
+        #         yanchor='bottom',
+        #         font=dict(
+        #         size=14
+        #         )
+        #         )
+        #     ]
         )
 
     data=[trace1, trace2]

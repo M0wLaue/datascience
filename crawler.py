@@ -2,9 +2,9 @@ import crawler
 import graphs.igraphCreator
 
 fetcher = crawler.WebsiteFetcher()  # pylint: disable=no-member
-fetcher.add_website("https://www.bytewerk.org/")
+fetcher.add_website("https://k-tronik.de")
 
-for website in fetcher.fetch(3):
+for website in fetcher.fetch(10):
     for link in website:
         print(link)
 
