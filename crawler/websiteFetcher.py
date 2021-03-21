@@ -1,4 +1,5 @@
 import time
+import random
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
@@ -6,8 +7,10 @@ from urllib.parse import urljoin
 from .crawledWebsite import CrawledWebsite
 
 class WebsiteFetcher():
-    def __init__(self):
+    def __init__(self, wait_time_max = 10):
         self.website_list = {}
+        self.wait_time_max = wait_time_max
+        random.seed()
 
     def add_website(self, url, depth=0):
         self.website_list[url] = CrawledWebsite(url, depth)
@@ -27,11 +30,11 @@ class WebsiteFetcher():
         while url != "" and depth < crawl_depth:
 
             print("checking: " + url)
+            time.sleep(random.randrange(self.wait_time_max))
             depth = self.website_list[url].depth
-            time.sleep(1)
             r = requests.get(url)
             doc = BeautifulSoup(r.text, "html.parser")
-            link_list = []
+            link_list = set()
             for a in doc.find_all("a"):
                 if "href" in a.attrs:
                     link = a.get('href').rstrip("/")
@@ -53,7 +56,7 @@ class WebsiteFetcher():
                     elif link.startswith("{"):
                         continue
 
-                    link_list.append(link)
+                    link_list.add(link)
                     if link not in self.website_list and link.startswith(url):
                         self.add_website(link, depth + 1)
             self.website_list[url].set_link_list(link_list)
