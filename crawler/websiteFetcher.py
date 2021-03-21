@@ -7,8 +7,9 @@ from urllib.parse import urljoin
 from .crawledWebsite import CrawledWebsite
 
 class WebsiteFetcher():
-    def __init__(self, wait_time_max = 10):
+    def __init__(self, url, wait_time_max = 10):
         self.website_list = {}
+        self.add_website(url)
         self.wait_time_max = wait_time_max
         random.seed()
 
