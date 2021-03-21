@@ -1,6 +1,4 @@
 import crawler
-import graphs.igraphCreator
-import os
 import pickle
 
 fetcher = crawler.WebsiteFetcher(wait_time_max=1)  # pylint: disable=no-member
@@ -18,11 +16,4 @@ for website in fetcher.fetch(10):
 with open("fetcher.data", "wb") as output_file:
     pickle.dump(fetcher, output_file)
 
-data = None
-with open("fetcher.data", "rb") as input_file:
-    data = pickle.load(input_file)
 
-graph = graphs.igraphCreator.NetworkGraph(data)
-graph.create()
-
-os.startfile("plot.html")
