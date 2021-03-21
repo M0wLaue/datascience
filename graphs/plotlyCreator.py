@@ -3,7 +3,7 @@ from plotly.graph_objs import *  # pylint: disable=unused-wildcard-import
 import igraph as ig
 
 
-def create_plotly_plot(layt, N, E, labels, colors):
+def create_plotly_plot(layt, N, E, labels, colors, sizes):
     Xn=[layt[k][0] for k in range(N)]
     Yn=[layt[k][1] for k in range(N)]
     Xe=[]
@@ -24,7 +24,7 @@ def create_plotly_plot(layt, N, E, labels, colors):
                 name='ntw',
                 marker=dict(symbol='circle-dot',
                                             color=colors,
-                                            size=6,
+                                            size=sizes,
                                             line=dict(color='rgb(50,50,50)', width=0.5)
                                             ),
                 text=labels,
@@ -38,8 +38,8 @@ def create_plotly_plot(layt, N, E, labels, colors):
             title=''
             )
 
-    width=1600
-    height=900
+    width=1400
+    height=800
     _layout=Layout(title= f"layout of {labels[0]}",
         font= dict(size=12),
         showlegend=False,
@@ -57,17 +57,20 @@ def create_plotly_plot(layt, N, E, labels, colors):
         hovermode='closest'#,
         # annotations=[
         #     dict(
-        #     showarrow=False,
-        #         text='This igraph.Graph has the Kamada-Kawai layout',
-        #         xref='paper',
-        #         yref='paper',
-        #         x=0,
-        #         y=-0.1,
-        #         xanchor='left',
-        #         yanchor='bottom',
-        #         font=dict(
-        #         size=14
-        #         )
+        #         x=30,  # arrows' head
+        #         y=30,  # arrows' head
+        #         ax=40,  # arrows' tail
+        #         ay=40,  # arrows' tail
+        #         xref='x',
+        #         yref='y',
+        #         axref='x',
+        #         ayref='y',
+        #         text='',  # if you want only the arrow
+        #         showarrow=True,
+        #         arrowhead=3,
+        #         arrowsize=1,
+        #         arrowwidth=1,
+        #         arrowcolor='black'
         #         )
         #     ]
         )
